@@ -14,7 +14,7 @@ import { Report } from './reports/reports.entity';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'db.sqlite',
-      entities: [User, Report], // list out all the things we want to store in app
+      entities: [User, Report], 
       synchronize: true,
     }),
   ],
