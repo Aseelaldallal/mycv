@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Patch, Param, Query, Post, Delete, NotFoundException } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Param, Query, Post, Delete, NotFoundException, Session } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
@@ -14,7 +14,12 @@ export class UsersController {
 
     @Post('/signup')
     createUser(@Body() body: CreateUserDto) { // Nest will validate body of incoming request against dto
-      this.authService.signup(body.email, body.password);
+      return this.authService.signup(body.email, body.password);
+    }
+
+    @Post('/signin')
+    signin(@Body() body: CreateUserDto) {
+      return this.authService.signin(body.email, body.password); 
     }
 
     @Get('/:id')

@@ -7,11 +7,20 @@ content-type: application/json
   "password": "asdfasdf"
 }
 
+### Create a new user
+POST http://localhost:3000/auth/signin
+content-type: application/json
+
+{
+  "email": "unique@gmail.com",
+  "password": "asdfaddddsdf"
+}
+
 ### Find user with particular id
 GET http://localhost:3000/auth/2
 
 ### Find all users with a given email
-GET http://localhost:3000/auth?email=quackfs@gmail.com
+GET http://localhost:3000/auth?email=unique@gmail.com
 
 ### Delete user with particular id
 DELETE http://localhost:3000/auth/3
@@ -23,3 +32,4 @@ content-type: application/json
 {
   "email": "aaaaaa@aaaa.com"
 }
+
