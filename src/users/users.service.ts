@@ -15,6 +15,9 @@ export class UsersService {
 
   // Returns one record or null
   findOne(userId: number) {
+    if(!userId) {
+      return null;
+    }
     return this.repo.findOneBy({
       id: userId
     });

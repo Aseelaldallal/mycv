@@ -3,18 +3,24 @@ POST http://localhost:3000/auth/signup
 content-type: application/json
 
 {
-  "email": "unique@gmail.com",
+  "email": "tests@test.com",
   "password": "asdfasdf"
 }
 
-### Create a new user
+### Sign in as an existing user
 POST http://localhost:3000/auth/signin
 content-type: application/json
 
 {
-  "email": "unique@gmail.com",
-  "password": "asdfaddddsdf"
+  "email": "test@test.com",
+  "password":  "asdfasdf"
 }
+
+### Sign out
+POST http://localhost:3000/auth/signout
+
+### Get currently signed in user
+GET http://localhost:3000/auth/whoami
 
 ### Find user with particular id
 GET http://localhost:3000/auth/2
