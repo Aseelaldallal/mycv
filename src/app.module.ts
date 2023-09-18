@@ -8,16 +8,28 @@ import { User } from './users/users.entity';
 import { Report } from './reports/reports.entity';
 import { ValidationPipe } from '@nestjs/common';
 import { APP_PIPE } from '@nestjs/core';
+import { ConfigModule, ConfigService } from '@nestjs/config'
+// ConfigModule: Specify which .env file we want to read
+// ConfigService: Expose info in files to rest of app
 import cookieSession = require('cookie-session');
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true, // Make this module available to rest of app
+      envFilePath: `.env.${process.env.NODE_ENV}`, // Specify which .env file we want to read
+    }),
     UsersModule,
     ReportsModule,
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'db.sqlite',
-      entities: [User, Report], 
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService], // Inject ConfigService into this module
+      useFactory: (config: ConfigService) => {
+        return {
+          type: 'sqlite',
+          database: config.get<string>('DB_NAME'),
+          entities: [User, Report], 
+          synchronize: true,
+        }
+      }
     }),
   ],
   controllers: [AppController],
